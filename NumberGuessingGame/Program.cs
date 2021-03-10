@@ -14,33 +14,36 @@ namespace NumberGuessingGame
             bool guessed = false;
             Console.WriteLine("I guessed a number from 1 to 100. You can try to guess it.");
             Console.WriteLine("Write your assumption:");
-            //try
-            //{
-                String input = Console.ReadLine().Trim();
-                while(!guessed && numberOfGuesses > 0)
-                {
-                    numberOfGuesses--;
-                    if (input.Length > 3)
-                    {
-                        throw new Exception("The number is too long");
-                    }
+
+            String input = Console.ReadLine().Trim();
+            while (!guessed && numberOfGuesses > 0)
+            {
+                numberOfGuesses--;
+
                 try
                 {
-                    userGuess = Convert.ToInt32(input);
-
-                    if (userGuess > number)
+                    if (input.Length > 3)
                     {
-                        Console.WriteLine($"The number {userGuess} is larger than my guess number.");
-                    }
-                    else if (userGuess < number)
-                    {
-                        Console.WriteLine($"The number {userGuess} is smaller than my guess number.");
+                        Console.WriteLine("The number is too long");
                     }
                     else
                     {
-                        Console.WriteLine("Well done. You guessed it!");
-                        guessed = true;
-                        break;
+                        userGuess = Convert.ToInt32(input);
+
+                        if (userGuess > number)
+                        {
+                            Console.WriteLine($"The number {userGuess} is larger than my guess number.");
+                        }
+                        else if (userGuess < number)
+                        {
+                            Console.WriteLine($"The number {userGuess} is smaller than my guess number.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Well done. You guessed it!");
+                            guessed = true;
+                            break;
+                        }
                     }
                 }
                 catch (FormatException)
@@ -48,23 +51,25 @@ namespace NumberGuessingGame
                     Console.WriteLine("You entered invalid data type. Please enter numbers only!");
 
                 }
-                if(numberOfGuesses < 0)
+                if (numberOfGuesses <= 0)
                 {
                     Console.WriteLine("Sorry to say it. But you lost!");
                 }
-                Console.WriteLine($"You have {numberOfGuesses} number of guesses left. Try again, I belive in you!");
-                Console.WriteLine("Make a guess one more time:");
-                input = Console.ReadLine().Trim();
-                    
+                if (numberOfGuesses > 1)
+                {
+                    Console.WriteLine($"You have {numberOfGuesses} number of guesses left. Try again, I belive in you!");
+                    Console.WriteLine("Make a guess one more time:");
+                    input = Console.ReadLine().Trim();
                 }
+                else if (numberOfGuesses == 1)
+                {
+                    Console.WriteLine("You have the last guess. Try again, I belive in you!");
+                    Console.WriteLine("Make a guess one more time:");
+                    input = Console.ReadLine().Trim();
+                }
+                
 
-            //}
-            //catch (FormatException)
-            //{
-            //    Console.WriteLine("You entered invalid data type. Please enter numbers only!");
-            //}
-            
-
+            }
         }
     }
 }
